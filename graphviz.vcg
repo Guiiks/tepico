@@ -1,0 +1,1474 @@
+graph: {
+	display_edge_labels:	yes
+	priority_phase:	yes
+	port_sharing:	no
+	crossing_weight:	median
+	splines:	yes
+	node: {
+		title:	"0"
+		label:	"state  0\n $accept -> . graph $end\n graph -> . strict graph_type T_ID T_LBRACE stmt_list T_RBRACE\n strict -> .[T_DIGRAPH, T_GRAPH]\n strict -> . T_STRICT"
+	}
+	edge: {
+		sourcename:	"0"
+		targetname:	"1"
+		label:	"T_STRICT"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"0"
+		targetname:	"2"
+		label:	"graph"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"0"
+		targetname:	"3"
+		label:	"strict"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"1"
+		label:	"state  1\n strict -> T_STRICT ."
+	}
+	node: {
+		title:	"2"
+		label:	"state  2\n $accept -> graph . $end"
+	}
+	edge: {
+		sourcename:	"2"
+		targetname:	"4"
+		label:	"$end"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"3"
+		label:	"state  3\n graph -> strict . graph_type T_ID T_LBRACE stmt_list T_RBRACE\n graph_type -> . T_DIGRAPH\n graph_type -> . T_GRAPH"
+	}
+	edge: {
+		sourcename:	"3"
+		targetname:	"5"
+		label:	"T_DIGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"3"
+		targetname:	"6"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"3"
+		targetname:	"7"
+		label:	"graph_type"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"4"
+		label:	"state  4\n $accept -> graph $end ."
+	}
+	node: {
+		title:	"5"
+		label:	"state  5\n graph_type -> T_DIGRAPH ."
+	}
+	node: {
+		title:	"6"
+		label:	"state  6\n graph_type -> T_GRAPH ."
+	}
+	node: {
+		title:	"7"
+		label:	"state  7\n graph -> strict graph_type . T_ID T_LBRACE stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"7"
+		targetname:	"8"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"8"
+		label:	"state  8\n graph -> strict graph_type T_ID . T_LBRACE stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"8"
+		targetname:	"9"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"9"
+		label:	"state  9\n graph -> strict graph_type T_ID T_LBRACE . stmt_list T_RBRACE\n stmt_list -> . stmt_list1\n stmt_list -> .[T_RBRACE]\n stmt_list1 -> . stmt\n stmt_list1 -> . stmt_list1 stmt\n stmt -> . stmt1\n stmt -> . stmt1 T_SEMI\n stmt1 -> . attr_stmt\n stmt1 -> . node_stmt\n stmt1 -> . edge_stmt\n stmt1 -> . subgraph\n stmt1 -> . attr_assignment\n attr_stmt -> . T_GRAPH attr_list\n attr_stmt -> . T_NODE attr_list\n attr_stmt -> . T_EDGE attr_list\n attr_assignment -> . T_ID T_EQ idrhs\n node_stmt -> . node_id\n node_stmt -> . node_id attr_list\n node_id -> . T_ID\n node_id -> . T_ID port\n edge_stmt -> . node_id edgerhs\n edge_stmt -> . node_id edgerhs attr_list\n edge_stmt -> . subgraph edgerhs\n edge_stmt -> . subgraph edgerhs attr_list\n subgraph -> . T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_SUBGRAPH T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_LBRACE stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"10"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"11"
+		label:	"T_EDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"12"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"13"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"14"
+		label:	"T_NODE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"15"
+		label:	"T_SUBGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"16"
+		label:	"stmt_list"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"17"
+		label:	"stmt_list1"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"18"
+		label:	"stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"19"
+		label:	"stmt1"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"20"
+		label:	"attr_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"21"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"22"
+		label:	"node_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"23"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"24"
+		label:	"edge_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"9"
+		targetname:	"25"
+		label:	"subgraph"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"10"
+		label:	"state 10\n stmt_list -> . stmt_list1\n stmt_list -> .[T_RBRACE]\n stmt_list1 -> . stmt\n stmt_list1 -> . stmt_list1 stmt\n stmt -> . stmt1\n stmt -> . stmt1 T_SEMI\n stmt1 -> . attr_stmt\n stmt1 -> . node_stmt\n stmt1 -> . edge_stmt\n stmt1 -> . subgraph\n stmt1 -> . attr_assignment\n attr_stmt -> . T_GRAPH attr_list\n attr_stmt -> . T_NODE attr_list\n attr_stmt -> . T_EDGE attr_list\n attr_assignment -> . T_ID T_EQ idrhs\n node_stmt -> . node_id\n node_stmt -> . node_id attr_list\n node_id -> . T_ID\n node_id -> . T_ID port\n edge_stmt -> . node_id edgerhs\n edge_stmt -> . node_id edgerhs attr_list\n edge_stmt -> . subgraph edgerhs\n edge_stmt -> . subgraph edgerhs attr_list\n subgraph -> . T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_SUBGRAPH T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_LBRACE stmt_list T_RBRACE\n subgraph -> T_LBRACE . stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"10"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"11"
+		label:	"T_EDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"12"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"13"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"14"
+		label:	"T_NODE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"15"
+		label:	"T_SUBGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"26"
+		label:	"stmt_list"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"17"
+		label:	"stmt_list1"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"18"
+		label:	"stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"19"
+		label:	"stmt1"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"20"
+		label:	"attr_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"21"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"22"
+		label:	"node_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"23"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"24"
+		label:	"edge_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"10"
+		targetname:	"25"
+		label:	"subgraph"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"11"
+		label:	"state 11\n attr_stmt -> T_EDGE . attr_list\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list"
+	}
+	edge: {
+		sourcename:	"11"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"11"
+		targetname:	"28"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"12"
+		label:	"state 12\n attr_stmt -> T_GRAPH . attr_list\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list"
+	}
+	edge: {
+		sourcename:	"12"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"12"
+		targetname:	"29"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"13"
+		label:	"state 13\n attr_assignment -> T_ID . T_EQ idrhs\n node_id -> T_ID .[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_DEDGE, T_UEDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n node_id -> T_ID . port\n port -> . port_location\n port -> . port_angle\n port -> . port_location port_angle\n port -> . port_angle port_location\n port_location -> . T_COLON T_ID\n port_location -> . T_COLON T_ID T_LPAREN T_ID T_COMMA T_ID T_RPAREN\n port_angle -> . T_AT T_ID"
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"30"
+		label:	"T_COLON"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"31"
+		label:	"T_AT"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"32"
+		label:	"T_EQ"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"33"
+		label:	"port"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"34"
+		label:	"port_location"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"13"
+		targetname:	"35"
+		label:	"port_angle"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"14"
+		label:	"state 14\n attr_stmt -> T_NODE . attr_list\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list"
+	}
+	edge: {
+		sourcename:	"14"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"14"
+		targetname:	"36"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"15"
+		label:	"state 15\n subgraph -> T_SUBGRAPH . T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> T_SUBGRAPH . T_LBRACE stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"15"
+		targetname:	"37"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"15"
+		targetname:	"38"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"16"
+		label:	"state 16\n graph -> strict graph_type T_ID T_LBRACE stmt_list . T_RBRACE"
+	}
+	edge: {
+		sourcename:	"16"
+		targetname:	"39"
+		label:	"T_RBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"17"
+		label:	"state 17\n stmt_list -> stmt_list1 .[T_RBRACE]\n stmt_list1 -> stmt_list1 . stmt\n stmt -> . stmt1\n stmt -> . stmt1 T_SEMI\n stmt1 -> . attr_stmt\n stmt1 -> . node_stmt\n stmt1 -> . edge_stmt\n stmt1 -> . subgraph\n stmt1 -> . attr_assignment\n attr_stmt -> . T_GRAPH attr_list\n attr_stmt -> . T_NODE attr_list\n attr_stmt -> . T_EDGE attr_list\n attr_assignment -> . T_ID T_EQ idrhs\n node_stmt -> . node_id\n node_stmt -> . node_id attr_list\n node_id -> . T_ID\n node_id -> . T_ID port\n edge_stmt -> . node_id edgerhs\n edge_stmt -> . node_id edgerhs attr_list\n edge_stmt -> . subgraph edgerhs\n edge_stmt -> . subgraph edgerhs attr_list\n subgraph -> . T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_SUBGRAPH T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_LBRACE stmt_list T_RBRACE"
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"10"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"11"
+		label:	"T_EDGE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"12"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"13"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"14"
+		label:	"T_NODE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"17"
+		targetname:	"15"
+		label:	"T_SUBGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"40"
+		label:	"stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"19"
+		label:	"stmt1"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"20"
+		label:	"attr_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"21"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"22"
+		label:	"node_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"23"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"24"
+		label:	"edge_stmt"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"17"
+		targetname:	"25"
+		label:	"subgraph"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"18"
+		label:	"state 18\n stmt_list1 -> stmt ."
+	}
+	node: {
+		title:	"19"
+		label:	"state 19\n stmt -> stmt1 .[T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n stmt -> stmt1 . T_SEMI"
+	}
+	edge: {
+		sourcename:	"19"
+		targetname:	"41"
+		label:	"T_SEMI"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"20"
+		label:	"state 20\n stmt1 -> attr_stmt ."
+	}
+	node: {
+		title:	"21"
+		label:	"state 21\n stmt1 -> attr_assignment ."
+	}
+	node: {
+		title:	"22"
+		label:	"state 22\n stmt1 -> node_stmt ."
+	}
+	node: {
+		title:	"23"
+		label:	"state 23\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list\n node_stmt -> node_id .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n node_stmt -> node_id . attr_list\n edge_stmt -> node_id . edgerhs\n edge_stmt -> node_id . edgerhs attr_list\n edgerhs -> . edgeop node_id\n edgerhs -> . edgeop node_id edgerhs\n edgeop -> . T_UEDGE\n edgeop -> . T_DEDGE"
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"42"
+		label:	"T_DEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"43"
+		label:	"T_UEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"44"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"45"
+		label:	"edgerhs"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"23"
+		targetname:	"46"
+		label:	"edgeop"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"24"
+		label:	"state 24\n stmt1 -> edge_stmt ."
+	}
+	node: {
+		title:	"25"
+		label:	"state 25\n stmt1 -> subgraph .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n edge_stmt -> subgraph . edgerhs\n edge_stmt -> subgraph . edgerhs attr_list\n edgerhs -> . edgeop node_id\n edgerhs -> . edgeop node_id edgerhs\n edgeop -> . T_UEDGE\n edgeop -> . T_DEDGE"
+	}
+	edge: {
+		sourcename:	"25"
+		targetname:	"42"
+		label:	"T_DEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"25"
+		targetname:	"43"
+		label:	"T_UEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"25"
+		targetname:	"47"
+		label:	"edgerhs"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"25"
+		targetname:	"46"
+		label:	"edgeop"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"26"
+		label:	"state 26\n subgraph -> T_LBRACE stmt_list . T_RBRACE"
+	}
+	edge: {
+		sourcename:	"26"
+		targetname:	"48"
+		label:	"T_RBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"27"
+		label:	"state 27\n attr_list -> T_LBRACKET . a_list T_RBRACKET\n attr_list -> T_LBRACKET . T_RBRACKET\n attr_list -> T_LBRACKET . a_list T_RBRACKET attr_list\n attr_list -> T_LBRACKET . T_RBRACKET attr_list\n a_list -> . attr_assignment\n a_list -> . attr_assignment T_COMMA a_list\n a_list -> . attr_assignment a_list\n attr_assignment -> . T_ID T_EQ idrhs"
+	}
+	edge: {
+		sourcename:	"27"
+		targetname:	"49"
+		label:	"T_RBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"27"
+		targetname:	"50"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"27"
+		targetname:	"51"
+		label:	"a_list"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"27"
+		targetname:	"52"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"28"
+		label:	"state 28\n attr_stmt -> T_EDGE attr_list ."
+	}
+	node: {
+		title:	"29"
+		label:	"state 29\n attr_stmt -> T_GRAPH attr_list ."
+	}
+	node: {
+		title:	"30"
+		label:	"state 30\n port_location -> T_COLON . T_ID\n port_location -> T_COLON . T_ID T_LPAREN T_ID T_COMMA T_ID T_RPAREN"
+	}
+	edge: {
+		sourcename:	"30"
+		targetname:	"53"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"31"
+		label:	"state 31\n port_angle -> T_AT . T_ID"
+	}
+	edge: {
+		sourcename:	"31"
+		targetname:	"54"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"32"
+		label:	"state 32\n attr_assignment -> T_ID T_EQ . idrhs\n idrhs -> . T_ID\n idrhs -> . T_STRING"
+	}
+	edge: {
+		sourcename:	"32"
+		targetname:	"55"
+		label:	"T_STRING"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"32"
+		targetname:	"56"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"32"
+		targetname:	"57"
+		label:	"idrhs"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"33"
+		label:	"state 33\n node_id -> T_ID port ."
+	}
+	node: {
+		title:	"34"
+		label:	"state 34\n port -> port_location .[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_DEDGE, T_UEDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n port -> port_location . port_angle\n port_angle -> . T_AT T_ID"
+	}
+	backedge: {
+		sourcename:	"34"
+		targetname:	"31"
+		label:	"T_AT"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"34"
+		targetname:	"58"
+		label:	"port_angle"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"35"
+		label:	"state 35\n port -> port_angle .[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_DEDGE, T_UEDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n port -> port_angle . port_location\n port_location -> . T_COLON T_ID\n port_location -> . T_COLON T_ID T_LPAREN T_ID T_COMMA T_ID T_RPAREN"
+	}
+	backedge: {
+		sourcename:	"35"
+		targetname:	"30"
+		label:	"T_COLON"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"35"
+		targetname:	"59"
+		label:	"port_location"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"36"
+		label:	"state 36\n attr_stmt -> T_NODE attr_list ."
+	}
+	node: {
+		title:	"37"
+		label:	"state 37\n stmt_list -> . stmt_list1\n stmt_list -> .[T_RBRACE]\n stmt_list1 -> . stmt\n stmt_list1 -> . stmt_list1 stmt\n stmt -> . stmt1\n stmt -> . stmt1 T_SEMI\n stmt1 -> . attr_stmt\n stmt1 -> . node_stmt\n stmt1 -> . edge_stmt\n stmt1 -> . subgraph\n stmt1 -> . attr_assignment\n attr_stmt -> . T_GRAPH attr_list\n attr_stmt -> . T_NODE attr_list\n attr_stmt -> . T_EDGE attr_list\n attr_assignment -> . T_ID T_EQ idrhs\n node_stmt -> . node_id\n node_stmt -> . node_id attr_list\n node_id -> . T_ID\n node_id -> . T_ID port\n edge_stmt -> . node_id edgerhs\n edge_stmt -> . node_id edgerhs attr_list\n edge_stmt -> . subgraph edgerhs\n edge_stmt -> . subgraph edgerhs attr_list\n subgraph -> . T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_SUBGRAPH T_LBRACE stmt_list T_RBRACE\n subgraph -> T_SUBGRAPH T_LBRACE . stmt_list T_RBRACE\n subgraph -> . T_LBRACE stmt_list T_RBRACE"
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"10"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"11"
+		label:	"T_EDGE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"12"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"13"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"14"
+		label:	"T_NODE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"15"
+		label:	"T_SUBGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"37"
+		targetname:	"60"
+		label:	"stmt_list"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"17"
+		label:	"stmt_list1"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"18"
+		label:	"stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"19"
+		label:	"stmt1"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"20"
+		label:	"attr_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"21"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"22"
+		label:	"node_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"23"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"24"
+		label:	"edge_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"37"
+		targetname:	"25"
+		label:	"subgraph"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"38"
+		label:	"state 38\n subgraph -> T_SUBGRAPH T_ID . T_LBRACE stmt_list T_RBRACE"
+	}
+	edge: {
+		sourcename:	"38"
+		targetname:	"61"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"39"
+		label:	"state 39\n graph -> strict graph_type T_ID T_LBRACE stmt_list T_RBRACE ."
+	}
+	node: {
+		title:	"40"
+		label:	"state 40\n stmt_list1 -> stmt_list1 stmt ."
+	}
+	node: {
+		title:	"41"
+		label:	"state 41\n stmt -> stmt1 T_SEMI ."
+	}
+	node: {
+		title:	"42"
+		label:	"state 42\n edgeop -> T_DEDGE ."
+	}
+	node: {
+		title:	"43"
+		label:	"state 43\n edgeop -> T_UEDGE ."
+	}
+	node: {
+		title:	"44"
+		label:	"state 44\n node_stmt -> node_id attr_list ."
+	}
+	node: {
+		title:	"45"
+		label:	"state 45\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list\n edge_stmt -> node_id edgerhs .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n edge_stmt -> node_id edgerhs . attr_list"
+	}
+	backedge: {
+		sourcename:	"45"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"45"
+		targetname:	"62"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"46"
+		label:	"state 46\n node_id -> . T_ID\n node_id -> . T_ID port\n edgerhs -> edgeop . node_id\n edgerhs -> edgeop . node_id edgerhs"
+	}
+	edge: {
+		sourcename:	"46"
+		targetname:	"63"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"46"
+		targetname:	"64"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"47"
+		label:	"state 47\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list\n edge_stmt -> subgraph edgerhs .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n edge_stmt -> subgraph edgerhs . attr_list"
+	}
+	backedge: {
+		sourcename:	"47"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"47"
+		targetname:	"65"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"48"
+		label:	"state 48\n subgraph -> T_LBRACE stmt_list T_RBRACE ."
+	}
+	node: {
+		title:	"49"
+		label:	"state 49\n attr_list -> . T_LBRACKET a_list T_RBRACKET\n attr_list -> . T_LBRACKET T_RBRACKET[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n attr_list -> T_LBRACKET T_RBRACKET .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list\n attr_list -> T_LBRACKET T_RBRACKET . attr_list"
+	}
+	backedge: {
+		sourcename:	"49"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"49"
+		targetname:	"66"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"50"
+		label:	"state 50\n attr_assignment -> T_ID . T_EQ idrhs"
+	}
+	backedge: {
+		sourcename:	"50"
+		targetname:	"32"
+		label:	"T_EQ"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"51"
+		label:	"state 51\n attr_list -> T_LBRACKET a_list . T_RBRACKET\n attr_list -> T_LBRACKET a_list . T_RBRACKET attr_list"
+	}
+	edge: {
+		sourcename:	"51"
+		targetname:	"67"
+		label:	"T_RBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"52"
+		label:	"state 52\n a_list -> . attr_assignment[T_RBRACKET]\n a_list -> attr_assignment .[T_RBRACKET]\n a_list -> . attr_assignment T_COMMA a_list\n a_list -> attr_assignment . T_COMMA a_list\n a_list -> . attr_assignment a_list\n a_list -> attr_assignment . a_list\n attr_assignment -> . T_ID T_EQ idrhs"
+	}
+	edge: {
+		sourcename:	"52"
+		targetname:	"68"
+		label:	"T_COMMA"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"52"
+		targetname:	"50"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"52"
+		targetname:	"69"
+		label:	"a_list"
+		color:	green
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"52"
+		targetname:	"52"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"53"
+		label:	"state 53\n port_location -> T_COLON T_ID .[T_SEMI, T_AT, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_DEDGE, T_UEDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n port_location -> T_COLON T_ID . T_LPAREN T_ID T_COMMA T_ID T_RPAREN"
+	}
+	edge: {
+		sourcename:	"53"
+		targetname:	"70"
+		label:	"T_LPAREN"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"54"
+		label:	"state 54\n port_angle -> T_AT T_ID ."
+	}
+	node: {
+		title:	"55"
+		label:	"state 55\n idrhs -> T_STRING ."
+	}
+	node: {
+		title:	"56"
+		label:	"state 56\n idrhs -> T_ID ."
+	}
+	node: {
+		title:	"57"
+		label:	"state 57\n attr_assignment -> T_ID T_EQ idrhs ."
+	}
+	node: {
+		title:	"58"
+		label:	"state 58\n port -> port_location port_angle ."
+	}
+	node: {
+		title:	"59"
+		label:	"state 59\n port -> port_angle port_location ."
+	}
+	node: {
+		title:	"60"
+		label:	"state 60\n subgraph -> T_SUBGRAPH T_LBRACE stmt_list . T_RBRACE"
+	}
+	edge: {
+		sourcename:	"60"
+		targetname:	"71"
+		label:	"T_RBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"61"
+		label:	"state 61\n stmt_list -> . stmt_list1\n stmt_list -> .[T_RBRACE]\n stmt_list1 -> . stmt\n stmt_list1 -> . stmt_list1 stmt\n stmt -> . stmt1\n stmt -> . stmt1 T_SEMI\n stmt1 -> . attr_stmt\n stmt1 -> . node_stmt\n stmt1 -> . edge_stmt\n stmt1 -> . subgraph\n stmt1 -> . attr_assignment\n attr_stmt -> . T_GRAPH attr_list\n attr_stmt -> . T_NODE attr_list\n attr_stmt -> . T_EDGE attr_list\n attr_assignment -> . T_ID T_EQ idrhs\n node_stmt -> . node_id\n node_stmt -> . node_id attr_list\n node_id -> . T_ID\n node_id -> . T_ID port\n edge_stmt -> . node_id edgerhs\n edge_stmt -> . node_id edgerhs attr_list\n edge_stmt -> . subgraph edgerhs\n edge_stmt -> . subgraph edgerhs attr_list\n subgraph -> . T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE\n subgraph -> T_SUBGRAPH T_ID T_LBRACE . stmt_list T_RBRACE\n subgraph -> . T_SUBGRAPH T_LBRACE stmt_list T_RBRACE\n subgraph -> . T_LBRACE stmt_list T_RBRACE"
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"10"
+		label:	"T_LBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"11"
+		label:	"T_EDGE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"12"
+		label:	"T_GRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"13"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"14"
+		label:	"T_NODE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"15"
+		label:	"T_SUBGRAPH"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"61"
+		targetname:	"72"
+		label:	"stmt_list"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"17"
+		label:	"stmt_list1"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"18"
+		label:	"stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"19"
+		label:	"stmt1"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"20"
+		label:	"attr_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"21"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"22"
+		label:	"node_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"23"
+		label:	"node_id"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"24"
+		label:	"edge_stmt"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"61"
+		targetname:	"25"
+		label:	"subgraph"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"62"
+		label:	"state 62\n edge_stmt -> node_id edgerhs attr_list ."
+	}
+	node: {
+		title:	"63"
+		label:	"state 63\n node_id -> T_ID .[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_DEDGE, T_UEDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n node_id -> T_ID . port\n port -> . port_location\n port -> . port_angle\n port -> . port_location port_angle\n port -> . port_angle port_location\n port_location -> . T_COLON T_ID\n port_location -> . T_COLON T_ID T_LPAREN T_ID T_COMMA T_ID T_RPAREN\n port_angle -> . T_AT T_ID"
+	}
+	backedge: {
+		sourcename:	"63"
+		targetname:	"30"
+		label:	"T_COLON"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"63"
+		targetname:	"31"
+		label:	"T_AT"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"63"
+		targetname:	"33"
+		label:	"port"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"63"
+		targetname:	"34"
+		label:	"port_location"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"63"
+		targetname:	"35"
+		label:	"port_angle"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"64"
+		label:	"state 64\n edgerhs -> . edgeop node_id[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n edgerhs -> edgeop node_id .[T_SEMI, T_LBRACKET, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n edgerhs -> . edgeop node_id edgerhs\n edgerhs -> edgeop node_id . edgerhs\n edgeop -> . T_UEDGE\n edgeop -> . T_DEDGE"
+	}
+	backedge: {
+		sourcename:	"64"
+		targetname:	"42"
+		label:	"T_DEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"64"
+		targetname:	"43"
+		label:	"T_UEDGE"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"64"
+		targetname:	"73"
+		label:	"edgerhs"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"64"
+		targetname:	"46"
+		label:	"edgeop"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"65"
+		label:	"state 65\n edge_stmt -> subgraph edgerhs attr_list ."
+	}
+	node: {
+		title:	"66"
+		label:	"state 66\n attr_list -> T_LBRACKET T_RBRACKET attr_list ."
+	}
+	node: {
+		title:	"67"
+		label:	"state 67\n attr_list -> . T_LBRACKET a_list T_RBRACKET[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n attr_list -> T_LBRACKET a_list T_RBRACKET .[T_SEMI, T_LBRACE, T_RBRACE, T_EDGE, T_GRAPH, T_ID, T_NODE, T_SUBGRAPH]\n attr_list -> . T_LBRACKET T_RBRACKET\n attr_list -> . T_LBRACKET a_list T_RBRACKET attr_list\n attr_list -> T_LBRACKET a_list T_RBRACKET . attr_list\n attr_list -> . T_LBRACKET T_RBRACKET attr_list"
+	}
+	backedge: {
+		sourcename:	"67"
+		targetname:	"27"
+		label:	"T_LBRACKET"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"67"
+		targetname:	"74"
+		label:	"attr_list"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"68"
+		label:	"state 68\n a_list -> . attr_assignment\n a_list -> . attr_assignment T_COMMA a_list\n a_list -> attr_assignment T_COMMA . a_list\n a_list -> . attr_assignment a_list\n attr_assignment -> . T_ID T_EQ idrhs"
+	}
+	backedge: {
+		sourcename:	"68"
+		targetname:	"50"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	edge: {
+		sourcename:	"68"
+		targetname:	"75"
+		label:	"a_list"
+		color:	green
+		textcolor:	black
+	}
+	backedge: {
+		sourcename:	"68"
+		targetname:	"52"
+		label:	"attr_assignment"
+		color:	green
+		textcolor:	black
+	}
+	node: {
+		title:	"69"
+		label:	"state 69\n a_list -> attr_assignment a_list ."
+	}
+	node: {
+		title:	"70"
+		label:	"state 70\n port_location -> T_COLON T_ID T_LPAREN . T_ID T_COMMA T_ID T_RPAREN"
+	}
+	edge: {
+		sourcename:	"70"
+		targetname:	"76"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"71"
+		label:	"state 71\n subgraph -> T_SUBGRAPH T_LBRACE stmt_list T_RBRACE ."
+	}
+	node: {
+		title:	"72"
+		label:	"state 72\n subgraph -> T_SUBGRAPH T_ID T_LBRACE stmt_list . T_RBRACE"
+	}
+	edge: {
+		sourcename:	"72"
+		targetname:	"77"
+		label:	"T_RBRACE"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"73"
+		label:	"state 73\n edgerhs -> edgeop node_id edgerhs ."
+	}
+	node: {
+		title:	"74"
+		label:	"state 74\n attr_list -> T_LBRACKET a_list T_RBRACKET attr_list ."
+	}
+	node: {
+		title:	"75"
+		label:	"state 75\n a_list -> attr_assignment T_COMMA a_list ."
+	}
+	node: {
+		title:	"76"
+		label:	"state 76\n port_location -> T_COLON T_ID T_LPAREN T_ID . T_COMMA T_ID T_RPAREN"
+	}
+	edge: {
+		sourcename:	"76"
+		targetname:	"78"
+		label:	"T_COMMA"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"77"
+		label:	"state 77\n subgraph -> T_SUBGRAPH T_ID T_LBRACE stmt_list T_RBRACE ."
+	}
+	node: {
+		title:	"78"
+		label:	"state 78\n port_location -> T_COLON T_ID T_LPAREN T_ID T_COMMA . T_ID T_RPAREN"
+	}
+	edge: {
+		sourcename:	"78"
+		targetname:	"79"
+		label:	"T_ID"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"79"
+		label:	"state 79\n port_location -> T_COLON T_ID T_LPAREN T_ID T_COMMA T_ID . T_RPAREN"
+	}
+	edge: {
+		sourcename:	"79"
+		targetname:	"80"
+		label:	"T_RPAREN"
+		color:	blue
+		textcolor:	black
+	}
+	node: {
+		title:	"80"
+		label:	"state 80\n port_location -> T_COLON T_ID T_LPAREN T_ID T_COMMA T_ID T_RPAREN ."
+	}
+
+
+}
