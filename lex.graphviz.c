@@ -1957,6 +1957,8 @@ void count()
 {
   int i;
 
+  printf("\n%s\n", graphviztext);
+
   for (i=0; graphviztext[i]!='\0'; i++)
     if (graphviztext[i] == '\n')
       column = 0;

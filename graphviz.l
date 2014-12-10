@@ -114,6 +114,8 @@ void count()
 {
   int i;
 
+  printf("\n%s\n", yytext);
+
   for (i=0; yytext[i]!='\0'; i++)
     if (yytext[i] == '\n')
       column = 0;
