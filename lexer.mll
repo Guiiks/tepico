@@ -1,41 +1,47 @@
+
+(* Ce fichier contient l'analyseur lexical dont le but va être de 'consommer' 
+	les symboles pour les fournir à l'analyseur syntaxique *)
+
 {
-open Parser
-open String
-exception Eof
+	open Parser
+	open String
+	exception Eof
 }
 
-
+(* Les graph, subgraph, strict, node et edge ne sont pas sensibles à la casse *)
 rule token = parse
-	| [' ' '\t' '\n'] { token lexbuf }
-	| "(*" { big_comment lexbuf } (* Deleting multi-lines comments *)
-	| "\n#" { comment lexbuf }  (* Deleting # comments -anywhere in the document except beginning -> # *)
-	| ("")+'#' { comment lexbuf }  (* Deleting # comments -beginning of file-  *)
-	| "//" { comment lexbuf } (* Deleting end line comments -> // *)
-	| '<' | '>' { token lexbuf }  (* Deleting HTML brackets *)
-	| ['g' 'G']['r' 'R']['a' 'A']['p' 'P']['h' 'H'] { GRAPH } (* graph, strict and subgraph are case-independent *)
+	| ['g' 'G']['r' 'R']['a' 'A']['p' 'P']['h' 'H'] { GRAPH }
 	| ['s' 'S']['u' 'U']['b' 'B']['g' 'G']['r' 'R']['a' 'A']['p' 'P']['h' 'H'] { SUBGRAPH }
 	| ['s' 'S']['t' 'T']['r' 'R']['i' 'I']['c' 'C']['t' 'T'] { STRICT }
 	| ['n' 'N']['o' 'O']['d' 'D']['e' 'E'] { NODE }
 	| ['e' 'E']['d' 'D']['g' 'G']['e' 'E'] { EDGE }
-	| "--" { EDGEOP }
+	| '{' { LCB }
+	| '}' { RCB }
 	| '[' { LB }
 	| ']' { RB }
+	| "--" { EDGEOP }
 	| ';' { SEMICOLON }
 	| ':' { COLON }
 	| '=' { EQUAL }
 	| ',' { COMMA }
-	| '{' { LCB }
-	| '}' { RCB }
+	| [' ' '\t' '\n'] { token lexbuf }
+	| '<' | '>' { token lexbuf }  (* Suppression des balises HTML *)
+	| ("")+'#' { comment lexbuf }  (* Suppression des commentaires au début du fichier *)
+	| "\n#" { comment lexbuf }  (* Suppression des commentaires après # dans le document *)
+	| "(*" { multilines_comment lexbuf } (* Suppression des commentaires multi-lignes *)
+	| "//" { comment lexbuf } (* Suppression des commentaires en fin de ligne // *)
 	| [^'0'-'9' '\n' '\t' ' ' '[' ']' ';' ':' '=' ',' '{' '}' '#' '"'][^'\n' '\t' ' ' '[' ']' ';' ':' '=' ',' '{' '}' '#' '"']* | ['0'-'9']+ as value { ID value }
 	| ['"'][^ '"']*['"']  as value { ID (sub value 1 ((length value)-2)) }
 	| eof | _ { EOF }
 	
+(* Fonction de parsage des commentaires sur une ligne *)
 and comment = parse
 	| '\n' { token lexbuf }
 	| _ { comment lexbuf }
 	| eof { raise End_of_file }
 
-and big_comment = parse
+(* Fonction de parsage des commentaires multi-lignes *)
+and multilines_comment = parse
 	| "*)" { token lexbuf }
-	| _ { big_comment lexbuf }
+	| _ { multilines_comment lexbuf }
 	| eof { raise End_of_file }

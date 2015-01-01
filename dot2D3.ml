@@ -322,9 +322,9 @@ let print_graph couple = match couple with
 ;;
 
 let save_graph_in_html couple filename =
-	let saved_graph = open_out ("./" ^ filename ^ ".html") in
-	let header = open_in "header.txt" in
-	let footer = open_in "footer.txt" in
+	let saved_graph = open_out ("./html/" ^ filename ^ ".html") in
+	let header = open_in "./html/header.html" in
+	let footer = open_in "./html/footer.html" in
 	try
 		while true; do
 			fprintf saved_graph "%s\n" (input_line header);
@@ -351,7 +351,7 @@ let _ =
 					let graph = Parser.graph Lexer.token lexbuf in
 						print_endline ("Graph: OK" ^ "\nContenu du graphe: " ^ (graph_to_string graph) ^ "\n"); let couple = call_create_nodes_edges graph in	
 							print_endline ("Nodes and edges: OK\n" ^ (couple_to_string couple) ^ "\n"); save_graph_in_html couple (chop_extension (basename (Sys.argv.(1))));
-							print_endline ("HTML: OK\n" ^ (print_graph couple) ^ "\n");
+							print_endline ("HTML generated in /output directory.\n" ^ (print_graph couple) ^ "\n");
 							flush stdout
 			with Lexer.Eof ->
 				close_in file;
