@@ -5,7 +5,7 @@ open Syntax;;
 %token <string> ID
 %token STRICT GRAPH EOF
 %token SEMICOLON
-%token LB LCB RB RCB
+%token OB OC CB CC
 %token SUBGRAPH
 %token EDGEOP
 %token COLON
@@ -20,10 +20,10 @@ open Syntax;;
 
 graph:
 		EOF { GRAPH(ID(""), []) }
-	|	STRICT GRAPH ID LCB stmt_list RCB EOF{ GRAPH(ID($3), $5) }
-	| STRICT GRAPH LCB stmt_list RCB EOF{ GRAPH(ID(""), $4) } 
-	| GRAPH ID LCB stmt_list RCB EOF { GRAPH(ID($2), $4) }
-	| GRAPH LCB stmt_list RCB EOF { GRAPH(ID(""), $3) }
+	|	STRICT GRAPH ID OC stmt_list CC EOF{ GRAPH(ID($3), $5) }
+	| STRICT GRAPH OC stmt_list CC EOF{ GRAPH(ID(""), $4) } 
+	| GRAPH ID OC stmt_list CC EOF { GRAPH(ID($2), $4) }
+	| GRAPH OC stmt_list CC EOF { GRAPH(ID(""), $3) }
 ;
 
 stmt_list:
@@ -39,9 +39,9 @@ node_id:
 ;
 
 subgraph: 
-		SUBGRAPH ID LCB stmt_list RCB { SUBGRAPH(ID($2), $4) }
-	| SUBGRAPH LCB stmt_list RCB { SUBGRAPH(ID(""), $3) }
-	| LCB stmt_list RCB { SUBGRAPH(ID(""), $2) } 
+		SUBGRAPH ID OC stmt_list CC { SUBGRAPH(ID($2), $4) }
+	| SUBGRAPH OC stmt_list CC { SUBGRAPH(ID(""), $3) }
+	| OC stmt_list CC { SUBGRAPH(ID(""), $2) } 
 ;
 
 edgeRHS: 
@@ -59,8 +59,8 @@ attr_stmt:
 
 attr_list: 
 		{[]}
-	|	LB a_list RB { [$2] }
-	|	LB a_list RB attr_list { [$2] @ $4 }
+	|	OB a_list CB { [$2] }
+	|	OB a_list CB attr_list { [$2] @ $4 }
 ;
 
 a_list:
