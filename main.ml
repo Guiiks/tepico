@@ -4,9 +4,9 @@ open Syntax
 open Dot2D3
 
 let save_graph_in_html couple filename =
-	let saved_graph = open_out ("./html/" ^ filename ^ ".html") in
-	let header = open_in "./html/header.html" in
-	let footer = open_in "./html/footer.html" in
+	let saved_graph = open_out ("./output/" ^ filename ^ ".html") in
+	let header = open_in "./includes/header.html" in
+	let footer = open_in "./includes/footer.html" in
 	try
 		while true; do
 			fprintf saved_graph "%s\n" (input_line header);
