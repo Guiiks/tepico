@@ -11,5 +11,5 @@ all:
 
 clean:
 	rm -rf main *.cmo *.cmi parser.mli *~ lexer.ml parser.ml parser.output
-	rm html/a.html html/b.html html/c.html
+	rm output/*.html
 	
