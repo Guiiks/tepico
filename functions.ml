@@ -58,11 +58,6 @@ let rec edges_to_string edges = match edges with
 	| head :: tail -> (edge_to_string head) ^ (edges_to_string tail) 
 ;;
 
-(* Affiche l'ensemble des noeuds et des arêtes *)
-let couple_to_string couple = match couple with 
-	| (nodes, edges) -> "[" ^ (nodes_to_string nodes) ^ "] [" ^ (edges_to_string edges) ^ "]\n" 
-;;
-
 (* Convertit un couple id et port en une string composé de l'id, le port n'étant pas implémenté dans le sujet *)
 let id_id_to_string id = match id with
 	| (ID(a), ID(b)) -> a

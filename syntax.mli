@@ -1,4 +1,6 @@
 type id = ID of string
+and type node = NODE of string * (string * string) list
+and type edge = EDGE of string * string * (string * string) list
 
 and edgeRHS = EDGERHS_EMPTY
 	| EDGERHS of stmt * edgeRHS
@@ -11,5 +13,4 @@ and stmt = NODE_STMT of (id * id) * ((id * id) list) list
 
 and graph = GRAPH of id * stmt list;;
 
-type node = NODE of string * (string * string) list;;
-type edge = EDGE of string * string * (string * string) list;;
+
