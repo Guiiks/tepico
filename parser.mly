@@ -1,3 +1,6 @@
+
+(* Analyseur syntaxique du projet *)
+
 %{
 open Syntax;;
 %}
@@ -20,7 +23,7 @@ open Syntax;;
 
 graph:
 		EOF { GRAPH(ID(""), []) }
-	|	STRICT GRAPH ID LCB stmt_list RCB EOF{ GRAPH(ID($3), $5) }
+	| STRICT GRAPH ID LCB stmt_list RCB EOF{ GRAPH(ID($3), $5) }
 	| STRICT GRAPH LCB stmt_list RCB EOF{ GRAPH(ID(""), $4) } 
 	| GRAPH ID LCB stmt_list RCB EOF { GRAPH(ID($2), $4) }
 	| GRAPH LCB stmt_list RCB EOF { GRAPH(ID(""), $3) }
@@ -28,7 +31,7 @@ graph:
 
 stmt_list:
 		{[]} 
-	|	stmt { [$1] }
+	| stmt { [$1] }
 	| stmt SEMICOLON stmt_list { $1 :: $3 }
 	| stmt stmt_list { $1 :: $2 }
 ;	
@@ -46,14 +49,14 @@ subgraph:
 
 edgeRHS: 
 		EDGEOP subgraph edgeRHS { EDGERHS($2, $3)}
-	|	EDGEOP subgraph { EDGERHS($2, EDGERHS_EMPTY) }
+	| EDGEOP subgraph { EDGERHS($2, EDGERHS_EMPTY) }
 	| EDGEOP node_id edgeRHS { EDGERHS(NODE_STMT($2, []), $3) }
 	| EDGEOP node_id { EDGERHS(NODE_STMT($2, []), EDGERHS_EMPTY) }
 ; 
 
 attr_stmt: 
 		GRAPH attr_list { ATTR_STMT("graph", $2) }
-	|	NODE attr_list { ATTR_STMT("node", $2) }
+	| NODE attr_list { ATTR_STMT("node", $2) }
 	| EDGE attr_list { ATTR_STMT("edge", $2) }
 ;
 
@@ -65,9 +68,9 @@ attr_list:
 
 a_list:
 		{[]} 
-	|	ID EQUAL ID  a_list { [(ID($1),ID($3))] @ $4}
-	|	ID EQUAL ID SEMICOLON a_list { [(ID($1),ID($3))] @ $5}
-	|	ID EQUAL ID COMMA a_list { [(ID($1),ID($3))] @ $5}
+	| ID EQUAL ID  a_list { [(ID($1),ID($3))] @ $4}
+	| ID EQUAL ID SEMICOLON a_list { [(ID($1),ID($3))] @ $5}
+	| ID EQUAL ID COMMA a_list { [(ID($1),ID($3))] @ $5}
 ;
 
 node_stmt: 
@@ -76,7 +79,7 @@ node_stmt:
 
 edge_stmt: 
 		subgraph edgeRHS attr_list { EDGE_STMT($1, $2, $3) }
-	|	node_id edgeRHS attr_list {EDGE_STMT(NODE_STMT($1, []), $2, $3) }
+	| node_id edgeRHS attr_list {EDGE_STMT(NODE_STMT($1, []), $2, $3) }
 ; 
 
 stmt:
