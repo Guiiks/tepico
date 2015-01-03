@@ -34,8 +34,9 @@ rule token = parse
 	| ',' { COMMA }
 	| [' ' '\t' '\n'] { token lexbuf }
 
-
-	| [^'0'-'9' '\n' '\t' ' ' '[' ']' ';' ':' '=' ',' '{' '}' '#' '"'][^'\n' '\t' ' ' '[' ']' ';' ':' '=' ',' '{' '}' '#' '"']* | ['0'-'9']+ as value { ID value }
+	(* Parameters and values *)
+	| ['0'-'9']+ as value { ID value }
+	| [^'0'-'9' '\n' '\t' '"' '{' '}' '[' ']' '=' ';' ':' ' ' ',' '#'][^'\n' '\t' '"' '{' '}' '[' ']' '=' ';' ':' ' ' ',' '#']*  as value { ID value }
 	| ['"'][^ '"']*['"']  as value { ID (sub value 1 ((length value)-2)) }
 
 	(* Comments and HTML tags *)
