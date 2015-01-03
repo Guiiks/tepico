@@ -25,7 +25,7 @@ let graph_to_string graph = match graph with
 	| GRAPH(id, stmt_list) -> (stmt_list_to_string stmt_list)
 ;;
 
-(* Affiche le contenu d'un paramêtre sous forme de string *)
+(* Affiche le contenu d'un paramètre sous forme de string *)
 let param_to_string param = match param with
 	| (a, b) -> a ^ "=" ^ b ^ "a"
 ;;
