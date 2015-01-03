@@ -7,7 +7,7 @@ open Syntax;;
 %token SEMICOLON
 %token OB OC CB CC
 %token SUBGRAPH
-%token EDGEOP
+%token EDGE_SEPARATOR
 %token COLON
 %token EDGE
 %token NODE
@@ -45,10 +45,10 @@ subgraph:
 ;
 
 edgeRHS: 
-		EDGEOP subgraph edgeRHS { EDGERHS($2, $3)}
-	| EDGEOP subgraph { EDGERHS($2, EDGERHS_EMPTY) }
-	| EDGEOP node_id edgeRHS { EDGERHS(NODE_STMT($2, []), $3) }
-	| EDGEOP node_id { EDGERHS(NODE_STMT($2, []), EDGERHS_EMPTY) }
+		EDGE_SEPARATOR subgraph edgeRHS { EDGERHS($2, $3)}
+	| EDGE_SEPARATOR subgraph { EDGERHS($2, EDGERHS_EMPTY) }
+	| EDGE_SEPARATOR node_id edgeRHS { EDGERHS(NODE_STMT($2, []), $3) }
+	| EDGE_SEPARATOR node_id { EDGERHS(NODE_STMT($2, []), EDGERHS_EMPTY) }
 ; 
 
 attr_stmt: 

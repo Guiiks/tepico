@@ -19,7 +19,7 @@ rule token = parse
 	| '}' { CC }
 	| '[' { OB }
 	| ']' { CB }
-	| "--" { EDGEOP }
+	| "--" { EDGE_SEPARATOR }
 	| ';' { SEMICOLON }
 	| ':' { COLON }
 	| '=' { EQUAL }
