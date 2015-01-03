@@ -15,10 +15,10 @@ rule token = parse
 	| ['s' 'S']['t' 'T']['r' 'R']['i' 'I']['c' 'C']['t' 'T'] { STRICT }
 	| ['n' 'N']['o' 'O']['d' 'D']['e' 'E'] { NODE }
 	| ['e' 'E']['d' 'D']['g' 'G']['e' 'E'] { EDGE }
-	| '{' { LCB }
-	| '}' { RCB }
-	| '[' { LB }
-	| ']' { RB }
+	| '{' { OC }
+	| '}' { CC }
+	| '[' { OB }
+	| ']' { CB }
 	| "--" { EDGEOP }
 	| ';' { SEMICOLON }
 	| ':' { COLON }
