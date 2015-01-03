@@ -6,8 +6,9 @@ all:
 	ocamlc -c lexer.ml
 	ocamlc -c parser.ml
 	ocamlc -c functions.ml
+	ocamlc -c html.ml
 	ocamlc -c main.ml
-	ocamlc -o main lexer.cmo 	parser.cmo functions.cmo main.cmo
+	ocamlc -o main lexer.cmo parser.cmo html.cmo functions.cmo main.cmo
 
 clean:
 	rm -rf main *.cmo *.cmi parser.mli *~ lexer.ml parser.ml parser.output
