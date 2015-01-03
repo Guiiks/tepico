@@ -320,4 +320,3 @@ let rec print_edges edges count = match edges with
 let print_graph couple = match couple with 
 	| (nodes, edges) -> (print_nodes nodes)^(print_edges edges 0)
 ;;
-
