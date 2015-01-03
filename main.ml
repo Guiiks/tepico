@@ -31,7 +31,7 @@ let _ =
 			try
 				let lexbuf = Lexing.from_channel file in
 					let graph = Parser.graph Lexer.token lexbuf in
-						print_endline ("Graph: OK" ^ "\nContenu du graphe: " ^ (graph_to_string graph) ^ "\n"); let couple = call_create_nodes_edges graph in	
+						print_endline ("Graph: OK"); let couple = call_create_nodes_edges graph in	
 							print_endline ("Nodes and edges: OK\n"); save_graph_in_html couple (chop_extension (basename (Sys.argv.(1))));
 							print_endline ("DONE.\n");
 							flush stdout

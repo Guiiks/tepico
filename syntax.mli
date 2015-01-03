@@ -1,6 +1,6 @@
 type id = ID of string
-and type node = NODE of string * (string * string) list
-and type edge = EDGE of string * string * (string * string) list
+and node = NODE of string * (string * string) list
+and edge = EDGE of string * string * (string * string) list
 
 and edgeRHS = EDGERHS_EMPTY
 	| EDGERHS of stmt * edgeRHS

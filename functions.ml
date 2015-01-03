@@ -3,60 +3,6 @@ open Filename
 open Syntax
 open Printf
 
-(* Affiche le contenu d'un stmt sous forme de string *)
-
-let stmt_to_string stmt = match stmt with
-	| NODE_STMT(_, _) -> "node_stmt"
-	| ATTR_STMT (_, _) -> "attr_stmt"
-	| ID_ID _ -> "ID = ID"
-	| EDGE_STMT(_, _, _) -> "edge_stmt"
-	| SUBGRAPH (_, _) -> "subgraph"
-;;
-
-
-(* Affiche le contenu d'une stmt_list sous forme de string*)
-let rec stmt_list_to_string stmt_list = match stmt_list with
-	| [] -> "" 
-	| head :: tail -> (stmt_to_string head) ^ ";" ^ (stmt_list_to_string tail)
-;;
-
-(* Affiche le contenu d'un graph sous forme de string *)
-let graph_to_string graph = match graph with
-	| GRAPH(id, stmt_list) -> (stmt_list_to_string stmt_list)
-;;
-
-(* Affiche le contenu d'un paramètre sous forme de string *)
-let param_to_string param = match param with
-	| (a, b) -> a ^ "=" ^ b ^ "a"
-;;
-
-(* Affiche le contenu d'une liste de paramètres sous forme de  string *)
-let rec params_to_string params = match params with
-	| [] -> ""
-	| head :: tail -> (param_to_string head) ^ "; " ^ (params_to_string tail)
-;;
-
-(* Affiche le contenu d'un noeud sous forme de string *)
-let node_to_string node = match node with
-	| NODE(node_id, node_params) -> "(ID= " ^ node_id ^ "; PARAMS= " ^ (params_to_string node_params) ^ ")"
-;;
-
-(* Affiche une liste de noeuds sous forme de string *)
-let rec nodes_to_string nodes = match nodes with
-	| [] -> ""
-	| head :: tail -> (node_to_string head) ^ (nodes_to_string tail)
-;;
-
-(* Affiche une arête sous forme de string *)
-let edge_to_string edge = match edge with
-	| EDGE(start_node, end_node, params) -> "(START= " ^ start_node ^ "; END= " ^ end_node ^ "; PARAMS= " ^ (params_to_string params) ^ ")"
-;;
-
-(* Affiche une liste d'arêtes sous forme de string *)
-let rec edges_to_string edges = match edges with
-	| [] -> ""
-	| head :: tail -> (edge_to_string head) ^ (edges_to_string tail) 
-;;
 
 (* Convertit un couple id et port en une string composé de l'id, le port n'étant pas implémenté dans le sujet *)
 let id_id_to_string id = match id with
