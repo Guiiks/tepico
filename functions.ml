@@ -4,7 +4,7 @@ open Syntax
 open Printf
 
 
-(*Converts a couple ("id", "port") into a string "id"*)
+(* Converts a couple ("id", "port") into a string "id" *)
 let id_id_to_string id = match id with
 	| (ID(a), ID(b)) -> a
 ;; 
@@ -17,6 +17,7 @@ let id_id_to_string_string id = match id with
 
 
 (* Returns the node list *)
+
 let get_node_list_from_couple couple = match couple with
 	| (a, b) -> a
 ;;
@@ -71,16 +72,16 @@ let compare_params param1 param2 =
 
 (* add the current parameter into the parameters list *)
 
-let rec sweep_param_list stmt_params param = match stmt_params with
+let rec sweep_param_list elem_params param = match elem_params with
 	| [] -> [param]
 	| head :: tail -> if (compare_params head param) then [(replace_param_value head param)]@tail else [head]@(sweep_param_list tail param)
 ;;
 
 (* sweeps the parameters list of a current statement to modify every single parameter *)
 
-let rec sweep_both_param_list stmt_params params = match params with
+let rec sweep_both_param_list elem_params params = match params with
 	| [] -> []
-	| head :: tail -> (sweep_param_list stmt_params head)@(sweep_both_param_list stmt_params tail)
+	| head :: tail -> (sweep_param_list elem_params head)@(sweep_both_param_list elem_params tail)
 ;;
 
 (* Merges a parameters list of an edge with a parameter list *)
@@ -143,7 +144,7 @@ let rec add_params_to_each_node nodes params = match nodes with
 
 (* Applies the statement attribute to the node, to the edge or to the graph *)
 
-let add_params_from_attr_stmt stmt_type params couple = match stmt_type with
+let add_params_from_attr elem_type params couple = match elem_type with
 	| "graph" -> couple 
 	| "node" -> ((add_params_to_each_node (get_node_list_from_couple couple) params), (get_edge_list_from_couple couple))
 	| "edge" -> ((get_node_list_from_couple couple), (add_params_to_each_edge (get_edge_list_from_couple couple) params)) 
@@ -207,26 +208,26 @@ let rec call_create_nodes_edges graph =
 
 (* Analysis of the current statement and decides what to do (add a node, and edge, a parameter *)
 	
-	let rec analyze_stmt stmt couple = match stmt with 
-		| NODE_STMT(id, params) -> sweep_node_list couple (id_id_to_string id) (attr_list_to_string_string_list params)
-		| ATTR_STMT (stmt_type, params) -> (add_params_from_attr_stmt stmt_type (attr_list_to_string_string_list params) couple)
-		| ID_ID param -> couple
-		| EDGE_STMT(stmt, edgeRHS, params) -> merge_couple (sweep_edge_stmt stmt edgeRHS ([], []) (attr_list_to_string_string_list params)) couple
-		| SUBGRAPH (id, stmt_list) -> merge_couple couple (call_create_nodes_edges (GRAPH(id, stmt_list))) (* Crée le sous-ensemble de sommets d'arêtes du subgraph et le fusionne avec celui du graph *) and
+	let rec analyze_elem elem couple = match elem with 
+		| NODE_ELEM(id, params) -> sweep_node_list couple (id_id_to_string id) (attr_list_to_string_string_list params)
+		| ATTR (elem_type, params) -> (add_params_from_attr elem_type (attr_list_to_string_string_list params) couple)
+		| ID_COUPLE param -> couple
+		| EDGE_ELEM(elem, edge_RHS, params) -> merge_couple (sweep_edge_elem elem edge_RHS ([], []) (attr_list_to_string_string_list params)) couple
+		| SUBGRAPH (id, elem_list) -> merge_couple couple (call_create_nodes_edges (GRAPH(id, elem_list))) (* Crée le sous-ensemble de sommets d'arêtes du subgraph et le fusionne avec celui du graph *) and
 			(* Creates the edges from an edge statement. If the node is not existing, it's also added *)
-			sweep_edge_stmt stmt edgeRHS couple params = match edgeRHS with
-				| EDGERHS_EMPTY -> ([], [])
-				| EDGERHS (next_stmt, next_edgeRHS)-> let c1 = (analyze_stmt stmt ([], [])) in
-					let c2 = (analyze_stmt next_stmt ([], [])) in 
+			sweep_edge_elem elem edge_RHS couple params = match edge_RHS with
+				| NULL -> ([], [])
+				| EDGE_RHS (next_elem, next_edge_RHS)-> let c1 = (analyze_elem elem ([], [])) in
+					let c2 = (analyze_elem next_elem ([], [])) in 
 					let c3 = merge_couple c1 c2 in 
 					let c4 = ((get_node_list_from_couple c3), (get_edge_list_from_couple c3)@(create_edges_between_nodes (get_node_list_from_couple c1) (get_node_list_from_couple c2) params)) in
-					let c5 = (merge_couple c4 (sweep_edge_stmt next_stmt next_edgeRHS couple params)) in
+					let c5 = (merge_couple c4 (sweep_edge_elem next_elem next_edge_RHS couple params)) in
 					(merge_couple couple c5) in
 				(* Gets the set of all nodes and edges from the statements of a graph *)
-				let rec sweep_stmt_list stmt_list couple = match stmt_list with
+				let rec sweep_elem_list elem_list couple = match elem_list with
 				| [] -> couple
-				| head :: tail -> sweep_stmt_list tail (analyze_stmt head couple) in
+				| head :: tail -> sweep_elem_list tail (analyze_elem head couple) in
 					let couple = ([], []) in  
 						match graph with
-						| GRAPH (id, stmt_list) -> sweep_stmt_list stmt_list couple
+						| GRAPH (id, elem_list) -> sweep_elem_list elem_list couple
 ;;

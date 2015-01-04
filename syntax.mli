@@ -2,15 +2,15 @@ type id = ID of string
 and node = NODE of string * (string * string) list
 and edge = EDGE of string * string * (string * string) list
 
-and edgeRHS = EDGERHS_EMPTY
-	| EDGERHS of stmt * edgeRHS
+and edge_RHS = NULL
+	| EDGE_RHS of elem * edge_RHS
 
-and stmt = NODE_STMT of (id * id) * ((id * id) list) list
-	| EDGE_STMT of stmt * edgeRHS * ((id * id) list) list
-	| ATTR_STMT of string * ((id * id) list) list 
-	| ID_ID of (id * id) 
-	| SUBGRAPH of id * stmt list
+and elem = NODE_ELEM of (id * id) * ((id * id) list) list
+	| EDGE_ELEM of elem * edge_RHS * ((id * id) list) list
+	| ATTR of string * ((id * id) list) list 
+	| ID_COUPLE of (id * id) 
+	| SUBGRAPH of id * elem list
 
-and graph = GRAPH of id * stmt list;;
+and graph = GRAPH of id * elem list;;
 
 

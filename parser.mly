@@ -20,17 +20,17 @@ open Syntax;;
 
 graph:
 	| EOF { GRAPH(ID(""), []) }
-	| STRICT GRAPH ID LBRA stmt_list RBRA EOF{ GRAPH(ID($3), $5) }
-	| STRICT GRAPH LBRA stmt_list RBRA EOF{ GRAPH(ID(""), $4) } 
-	| GRAPH ID LBRA stmt_list RBRA EOF { GRAPH(ID($2), $4) }
-	| GRAPH LBRA stmt_list RBRA EOF { GRAPH(ID(""), $3) }
+	| STRICT GRAPH ID LBRA elem_list RBRA EOF{ GRAPH(ID($3), $5) }
+	| STRICT GRAPH LBRA elem_list RBRA EOF{ GRAPH(ID(""), $4) } 
+	| GRAPH ID LBRA elem_list RBRA EOF { GRAPH(ID($2), $4) }
+	| GRAPH LBRA elem_list RBRA EOF { GRAPH(ID(""), $3) }
 ;
 
-stmt_list:
+elem_list:
 	| {[]} 
-	| stmt { [$1] }
-	| stmt SEMICOLON stmt_list { $1 :: $3 }
-	| stmt stmt_list { $1 :: $2 }
+	| elem { [$1] }
+	| elem SEMICOLON elem_list { $1 :: $3 }
+	| elem elem_list { $1 :: $2 }
 ;	
 
 node_id: 
@@ -39,22 +39,22 @@ node_id:
 ;
 
 subgraph: 
-	| SUBGRAPH ID LBRA stmt_list RBRA { SUBGRAPH(ID($2), $4) }
-	| SUBGRAPH LBRA stmt_list RBRA { SUBGRAPH(ID(""), $3) }
-	| LBRA stmt_list RBRA { SUBGRAPH(ID(""), $2) } 
+	| SUBGRAPH ID LBRA elem_list RBRA { SUBGRAPH(ID($2), $4) }
+	| SUBGRAPH LBRA elem_list RBRA { SUBGRAPH(ID(""), $3) }
+	| LBRA elem_list RBRA { SUBGRAPH(ID(""), $2) } 
 ;
 
-edgeRHS: 
-	| EDGE_SEPARATOR subgraph edgeRHS { EDGERHS($2, $3)}
-	| EDGE_SEPARATOR subgraph { EDGERHS($2, EDGERHS_EMPTY) }
-	| EDGE_SEPARATOR node_id edgeRHS { EDGERHS(NODE_STMT($2, []), $3) }
-	| EDGE_SEPARATOR node_id { EDGERHS(NODE_STMT($2, []), EDGERHS_EMPTY) }
+edge_RHS: 
+	| EDGE_SEPARATOR subgraph edge_RHS { EDGE_RHS($2, $3)}
+	| EDGE_SEPARATOR subgraph { EDGE_RHS($2, NULL) }
+	| EDGE_SEPARATOR node_id edge_RHS { EDGE_RHS(NODE_ELEM($2, []), $3) }
+	| EDGE_SEPARATOR node_id { EDGE_RHS(NODE_ELEM($2, []), NULL) }
 ; 
 
-attr_stmt: 
-	| GRAPH attr_list { ATTR_STMT("graph", $2) }
-	| NODE attr_list { ATTR_STMT("node", $2) }
-	| EDGE attr_list { ATTR_STMT("edge", $2) }
+attr: 
+	| GRAPH attr_list { ATTR("graph", $2) }
+	| NODE attr_list { ATTR("node", $2) }
+	| EDGE attr_list { ATTR("edge", $2) }
 ;
 
 attr_list: 
@@ -70,20 +70,20 @@ a_list:
 	| ID EQUAL ID COMMA a_list { [(ID($1),ID($3))] @ $5}
 ;
 
-node_stmt: 
-	| node_id attr_list { NODE_STMT($1, $2) }
+node_elem: 
+	| node_id attr_list { NODE_ELEM($1, $2) }
 ;
 
-edge_stmt: 
-	| subgraph edgeRHS attr_list { EDGE_STMT($1, $2, $3) }
-	| node_id edgeRHS attr_list {EDGE_STMT(NODE_STMT($1, []), $2, $3) }
+edge_elem: 
+	| subgraph edge_RHS attr_list { EDGE_ELEM($1, $2, $3) }
+	| node_id edge_RHS attr_list {EDGE_ELEM(NODE_ELEM($1, []), $2, $3) }
 ; 
 
-stmt:
-	| node_stmt { $1 }
-	| edge_stmt { $1 }
-	| ID EQUAL ID { ID_ID(ID($1), ID($3)) }
-	| attr_stmt { $1 }
+elem:
+	| node_elem { $1 }
+	| edge_elem { $1 }
+	| ID EQUAL ID { ID_COUPLE(ID($1), ID($3)) }
+	| attr { $1 }
 	| subgraph { $1 }
 ;
 %%
