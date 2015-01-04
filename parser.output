@@ -1,0 +1,897 @@
+   0  $accept : %entry% $end
+
+   1  a_list : ID EQUAL ID COMMA a_list
+   2         | ID EQUAL ID SEMICOLON a_list
+   3         | ID EQUAL ID a_list
+   4         |
+
+   5  attr : GRAPH attr_list
+   6       | NODE attr_list
+   7       | EDGE attr_list
+
+   8  attr_list : LSBRA a_list RSBRA attr_list
+   9            | LSBRA a_list RSBRA
+  10            |
+
+  11  edge_RHS : EDGE_SEPARATOR subgraph
+  12           | EDGE_SEPARATOR node_id
+  13           | EDGE_SEPARATOR subgraph edge_RHS
+  14           | EDGE_SEPARATOR node_id edge_RHS
+
+  15  edge_elem : subgraph edge_RHS attr_list
+  16            | node_id edge_RHS attr_list
+
+  17  elem : attr
+  18       | subgraph
+  19       | ID EQUAL ID
+  20       | edge_elem
+  21       | node_elem
+
+  22  elem_list : elem SEMICOLON elem_list
+  23            | elem elem_list
+  24            | elem
+  25            |
+
+  26  graph : GRAPH ID LBRA elem_list RBRA EOF
+  27        | GRAPH LBRA elem_list RBRA EOF
+  28        | STRICT GRAPH ID LBRA elem_list RBRA EOF
+  29        | STRICT GRAPH LBRA elem_list RBRA EOF
+  30        | EOF
+
+  31  node_elem : node_id attr_list
+
+  32  node_id : ID
+  33          | ID COLON ID
+
+  34  subgraph : LBRA elem_list RBRA
+  35           | SUBGRAPH ID LBRA elem_list RBRA
+  36           | SUBGRAPH LBRA elem_list RBRA
+
+  37  %entry% : '\001' graph
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . graph  (37)
+
+	STRICT  shift 3
+	GRAPH  shift 4
+	EOF  shift 5
+	.  error
+
+	graph  goto 6
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	graph : STRICT . GRAPH ID LBRA elem_list RBRA EOF  (28)
+	graph : STRICT . GRAPH LBRA elem_list RBRA EOF  (29)
+
+	GRAPH  shift 7
+	.  error
+
+
+state 4
+	graph : GRAPH . ID LBRA elem_list RBRA EOF  (26)
+	graph : GRAPH . LBRA elem_list RBRA EOF  (27)
+
+	ID  shift 8
+	LBRA  shift 9
+	.  error
+
+
+state 5
+	graph : EOF .  (30)
+
+	.  reduce 30
+
+
+state 6
+	%entry% : '\001' graph .  (37)
+
+	.  reduce 37
+
+
+state 7
+	graph : STRICT GRAPH . ID LBRA elem_list RBRA EOF  (28)
+	graph : STRICT GRAPH . LBRA elem_list RBRA EOF  (29)
+
+	ID  shift 10
+	LBRA  shift 11
+	.  error
+
+
+state 8
+	graph : GRAPH ID . LBRA elem_list RBRA EOF  (26)
+
+	LBRA  shift 12
+	.  error
+
+
+state 9
+	graph : GRAPH LBRA . elem_list RBRA EOF  (27)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 25
+
+
+state 10
+	graph : STRICT GRAPH ID . LBRA elem_list RBRA EOF  (28)
+
+	LBRA  shift 26
+	.  error
+
+
+state 11
+	graph : STRICT GRAPH LBRA . elem_list RBRA EOF  (29)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 27
+
+
+state 12
+	graph : GRAPH ID LBRA . elem_list RBRA EOF  (26)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 28
+
+
+state 13
+	elem : ID . EQUAL ID  (19)
+	node_id : ID .  (32)
+	node_id : ID . COLON ID  (33)
+
+	COLON  shift 29
+	EQUAL  shift 30
+	ID  reduce 32
+	GRAPH  reduce 32
+	SUBGRAPH  reduce 32
+	SEMICOLON  reduce 32
+	EDGE  reduce 32
+	NODE  reduce 32
+	LSBRA  reduce 32
+	LBRA  reduce 32
+	RBRA  reduce 32
+	EDGE_SEPARATOR  reduce 32
+
+
+state 14
+	attr : GRAPH . attr_list  (5)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 32
+
+
+state 15
+	subgraph : SUBGRAPH . ID LBRA elem_list RBRA  (35)
+	subgraph : SUBGRAPH . LBRA elem_list RBRA  (36)
+
+	ID  shift 33
+	LBRA  shift 34
+	.  error
+
+
+state 16
+	attr : EDGE . attr_list  (7)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 35
+
+
+state 17
+	attr : NODE . attr_list  (6)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 36
+
+
+state 18
+	subgraph : LBRA . elem_list RBRA  (34)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 37
+
+
+state 19
+	elem : attr .  (17)
+
+	.  reduce 17
+
+
+state 20
+	edge_elem : subgraph . edge_RHS attr_list  (15)
+	elem : subgraph .  (18)
+
+	EDGE_SEPARATOR  shift 38
+	ID  reduce 18
+	GRAPH  reduce 18
+	SUBGRAPH  reduce 18
+	SEMICOLON  reduce 18
+	EDGE  reduce 18
+	NODE  reduce 18
+	LBRA  reduce 18
+	RBRA  reduce 18
+
+	edge_RHS  goto 39
+
+
+state 21
+	edge_elem : node_id . edge_RHS attr_list  (16)
+	node_elem : node_id . attr_list  (31)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	EDGE_SEPARATOR  shift 38
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 40
+	edge_RHS  goto 41
+
+
+state 22
+	elem : edge_elem .  (20)
+
+	.  reduce 20
+
+
+23: reduce/reduce conflict (reduce 24, reduce 25) on RBRA
+state 23
+	elem_list : elem . SEMICOLON elem_list  (22)
+	elem_list : elem . elem_list  (23)
+	elem_list : elem .  (24)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	SEMICOLON  shift 42
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 24
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 43
+
+
+state 24
+	elem : node_elem .  (21)
+
+	.  reduce 21
+
+
+state 25
+	graph : GRAPH LBRA elem_list . RBRA EOF  (27)
+
+	RBRA  shift 44
+	.  error
+
+
+state 26
+	graph : STRICT GRAPH ID LBRA . elem_list RBRA EOF  (28)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 45
+
+
+state 27
+	graph : STRICT GRAPH LBRA elem_list . RBRA EOF  (29)
+
+	RBRA  shift 46
+	.  error
+
+
+state 28
+	graph : GRAPH ID LBRA elem_list . RBRA EOF  (26)
+
+	RBRA  shift 47
+	.  error
+
+
+state 29
+	node_id : ID COLON . ID  (33)
+
+	ID  shift 48
+	.  error
+
+
+state 30
+	elem : ID EQUAL . ID  (19)
+
+	ID  shift 49
+	.  error
+
+
+state 31
+	attr_list : LSBRA . a_list RSBRA attr_list  (8)
+	attr_list : LSBRA . a_list RSBRA  (9)
+	a_list : .  (4)
+
+	ID  shift 50
+	RSBRA  reduce 4
+
+	a_list  goto 51
+
+
+state 32
+	attr : GRAPH attr_list .  (5)
+
+	.  reduce 5
+
+
+state 33
+	subgraph : SUBGRAPH ID . LBRA elem_list RBRA  (35)
+
+	LBRA  shift 52
+	.  error
+
+
+state 34
+	subgraph : SUBGRAPH LBRA . elem_list RBRA  (36)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 53
+
+
+state 35
+	attr : EDGE attr_list .  (7)
+
+	.  reduce 7
+
+
+state 36
+	attr : NODE attr_list .  (6)
+
+	.  reduce 6
+
+
+state 37
+	subgraph : LBRA elem_list . RBRA  (34)
+
+	RBRA  shift 54
+	.  error
+
+
+state 38
+	edge_RHS : EDGE_SEPARATOR . subgraph  (11)
+	edge_RHS : EDGE_SEPARATOR . node_id  (12)
+	edge_RHS : EDGE_SEPARATOR . subgraph edge_RHS  (13)
+	edge_RHS : EDGE_SEPARATOR . node_id edge_RHS  (14)
+
+	ID  shift 55
+	SUBGRAPH  shift 15
+	LBRA  shift 18
+	.  error
+
+	subgraph  goto 56
+	node_id  goto 57
+
+
+state 39
+	edge_elem : subgraph edge_RHS . attr_list  (15)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 58
+
+
+state 40
+	node_elem : node_id attr_list .  (31)
+
+	.  reduce 31
+
+
+state 41
+	edge_elem : node_id edge_RHS . attr_list  (16)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 10
+	GRAPH  reduce 10
+	SUBGRAPH  reduce 10
+	SEMICOLON  reduce 10
+	EDGE  reduce 10
+	NODE  reduce 10
+	LBRA  reduce 10
+	RBRA  reduce 10
+
+	attr_list  goto 59
+
+
+state 42
+	elem_list : elem SEMICOLON . elem_list  (22)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 60
+
+
+state 43
+	elem_list : elem elem_list .  (23)
+
+	.  reduce 23
+
+
+state 44
+	graph : GRAPH LBRA elem_list RBRA . EOF  (27)
+
+	EOF  shift 61
+	.  error
+
+
+state 45
+	graph : STRICT GRAPH ID LBRA elem_list . RBRA EOF  (28)
+
+	RBRA  shift 62
+	.  error
+
+
+state 46
+	graph : STRICT GRAPH LBRA elem_list RBRA . EOF  (29)
+
+	EOF  shift 63
+	.  error
+
+
+state 47
+	graph : GRAPH ID LBRA elem_list RBRA . EOF  (26)
+
+	EOF  shift 64
+	.  error
+
+
+state 48
+	node_id : ID COLON ID .  (33)
+
+	.  reduce 33
+
+
+state 49
+	elem : ID EQUAL ID .  (19)
+
+	.  reduce 19
+
+
+state 50
+	a_list : ID . EQUAL ID COMMA a_list  (1)
+	a_list : ID . EQUAL ID SEMICOLON a_list  (2)
+	a_list : ID . EQUAL ID a_list  (3)
+
+	EQUAL  shift 65
+	.  error
+
+
+state 51
+	attr_list : LSBRA a_list . RSBRA attr_list  (8)
+	attr_list : LSBRA a_list . RSBRA  (9)
+
+	RSBRA  shift 66
+	.  error
+
+
+state 52
+	subgraph : SUBGRAPH ID LBRA . elem_list RBRA  (35)
+	elem_list : .  (25)
+
+	ID  shift 13
+	GRAPH  shift 14
+	SUBGRAPH  shift 15
+	EDGE  shift 16
+	NODE  shift 17
+	LBRA  shift 18
+	RBRA  reduce 25
+
+	attr  goto 19
+	subgraph  goto 20
+	node_id  goto 21
+	edge_elem  goto 22
+	elem  goto 23
+	node_elem  goto 24
+	elem_list  goto 67
+
+
+state 53
+	subgraph : SUBGRAPH LBRA elem_list . RBRA  (36)
+
+	RBRA  shift 68
+	.  error
+
+
+state 54
+	subgraph : LBRA elem_list RBRA .  (34)
+
+	.  reduce 34
+
+
+state 55
+	node_id : ID .  (32)
+	node_id : ID . COLON ID  (33)
+
+	COLON  shift 29
+	ID  reduce 32
+	GRAPH  reduce 32
+	SUBGRAPH  reduce 32
+	SEMICOLON  reduce 32
+	EDGE  reduce 32
+	NODE  reduce 32
+	LSBRA  reduce 32
+	LBRA  reduce 32
+	RBRA  reduce 32
+	EDGE_SEPARATOR  reduce 32
+
+
+state 56
+	edge_RHS : EDGE_SEPARATOR subgraph .  (11)
+	edge_RHS : EDGE_SEPARATOR subgraph . edge_RHS  (13)
+
+	EDGE_SEPARATOR  shift 38
+	ID  reduce 11
+	GRAPH  reduce 11
+	SUBGRAPH  reduce 11
+	SEMICOLON  reduce 11
+	EDGE  reduce 11
+	NODE  reduce 11
+	LSBRA  reduce 11
+	LBRA  reduce 11
+	RBRA  reduce 11
+
+	edge_RHS  goto 69
+
+
+state 57
+	edge_RHS : EDGE_SEPARATOR node_id .  (12)
+	edge_RHS : EDGE_SEPARATOR node_id . edge_RHS  (14)
+
+	EDGE_SEPARATOR  shift 38
+	ID  reduce 12
+	GRAPH  reduce 12
+	SUBGRAPH  reduce 12
+	SEMICOLON  reduce 12
+	EDGE  reduce 12
+	NODE  reduce 12
+	LSBRA  reduce 12
+	LBRA  reduce 12
+	RBRA  reduce 12
+
+	edge_RHS  goto 70
+
+
+state 58
+	edge_elem : subgraph edge_RHS attr_list .  (15)
+
+	.  reduce 15
+
+
+state 59
+	edge_elem : node_id edge_RHS attr_list .  (16)
+
+	.  reduce 16
+
+
+state 60
+	elem_list : elem SEMICOLON elem_list .  (22)
+
+	.  reduce 22
+
+
+state 61
+	graph : GRAPH LBRA elem_list RBRA EOF .  (27)
+
+	.  reduce 27
+
+
+state 62
+	graph : STRICT GRAPH ID LBRA elem_list RBRA . EOF  (28)
+
+	EOF  shift 71
+	.  error
+
+
+state 63
+	graph : STRICT GRAPH LBRA elem_list RBRA EOF .  (29)
+
+	.  reduce 29
+
+
+state 64
+	graph : GRAPH ID LBRA elem_list RBRA EOF .  (26)
+
+	.  reduce 26
+
+
+state 65
+	a_list : ID EQUAL . ID COMMA a_list  (1)
+	a_list : ID EQUAL . ID SEMICOLON a_list  (2)
+	a_list : ID EQUAL . ID a_list  (3)
+
+	ID  shift 72
+	.  error
+
+
+66: reduce/reduce conflict (reduce 9, reduce 10) on ID
+66: reduce/reduce conflict (reduce 9, reduce 10) on GRAPH
+66: reduce/reduce conflict (reduce 9, reduce 10) on SUBGRAPH
+66: reduce/reduce conflict (reduce 9, reduce 10) on SEMICOLON
+66: reduce/reduce conflict (reduce 9, reduce 10) on EDGE
+66: reduce/reduce conflict (reduce 9, reduce 10) on NODE
+66: reduce/reduce conflict (reduce 9, reduce 10) on LBRA
+66: reduce/reduce conflict (reduce 9, reduce 10) on RBRA
+state 66
+	attr_list : LSBRA a_list RSBRA . attr_list  (8)
+	attr_list : LSBRA a_list RSBRA .  (9)
+	attr_list : .  (10)
+
+	LSBRA  shift 31
+	ID  reduce 9
+	GRAPH  reduce 9
+	SUBGRAPH  reduce 9
+	SEMICOLON  reduce 9
+	EDGE  reduce 9
+	NODE  reduce 9
+	LBRA  reduce 9
+	RBRA  reduce 9
+
+	attr_list  goto 73
+
+
+state 67
+	subgraph : SUBGRAPH ID LBRA elem_list . RBRA  (35)
+
+	RBRA  shift 74
+	.  error
+
+
+state 68
+	subgraph : SUBGRAPH LBRA elem_list RBRA .  (36)
+
+	.  reduce 36
+
+
+state 69
+	edge_RHS : EDGE_SEPARATOR subgraph edge_RHS .  (13)
+
+	.  reduce 13
+
+
+state 70
+	edge_RHS : EDGE_SEPARATOR node_id edge_RHS .  (14)
+
+	.  reduce 14
+
+
+state 71
+	graph : STRICT GRAPH ID LBRA elem_list RBRA EOF .  (28)
+
+	.  reduce 28
+
+
+state 72
+	a_list : ID EQUAL ID . COMMA a_list  (1)
+	a_list : ID EQUAL ID . SEMICOLON a_list  (2)
+	a_list : ID EQUAL ID . a_list  (3)
+	a_list : .  (4)
+
+	ID  shift 50
+	SEMICOLON  shift 75
+	COMMA  shift 76
+	RSBRA  reduce 4
+
+	a_list  goto 77
+
+
+state 73
+	attr_list : LSBRA a_list RSBRA attr_list .  (8)
+
+	.  reduce 8
+
+
+state 74
+	subgraph : SUBGRAPH ID LBRA elem_list RBRA .  (35)
+
+	.  reduce 35
+
+
+state 75
+	a_list : ID EQUAL ID SEMICOLON . a_list  (2)
+	a_list : .  (4)
+
+	ID  shift 50
+	RSBRA  reduce 4
+
+	a_list  goto 78
+
+
+state 76
+	a_list : ID EQUAL ID COMMA . a_list  (1)
+	a_list : .  (4)
+
+	ID  shift 50
+	RSBRA  reduce 4
+
+	a_list  goto 79
+
+
+state 77
+	a_list : ID EQUAL ID a_list .  (3)
+
+	.  reduce 3
+
+
+state 78
+	a_list : ID EQUAL ID SEMICOLON a_list .  (2)
+
+	.  reduce 2
+
+
+state 79
+	a_list : ID EQUAL ID COMMA a_list .  (1)
+
+	.  reduce 1
+
+
+State 23 contains 1 reduce/reduce conflict.
+State 66 contains 8 reduce/reduce conflicts.
+
+
+19 terminals, 13 nonterminals
+38 grammar rules, 80 states
