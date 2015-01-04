@@ -10,7 +10,6 @@
 	exception Eof
 }
 
-(* Les graph, subgraph, strict, node et edge ne sont pas sensibles à la casse *)
 rule token = parse
 
 	(* Data structures *)
@@ -47,3 +46,4 @@ rule token = parse
 
 	(* End of File *)
 	| eof | _ { EOF }
+

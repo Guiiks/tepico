@@ -20,7 +20,7 @@ open Syntax;;
 
 /*
 	Abstract Syntax Tree representing the DOT grammar
-	References: https://godoc.org/code.google.com/p/gographviz/ast
+	Reference: https://godoc.org/code.google.com/p/gographviz/ast
 */
 
 a_list:
