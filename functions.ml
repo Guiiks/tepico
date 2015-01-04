@@ -212,6 +212,7 @@ let rec call_create_nodes_edges graph =
 						| GRAPH (id, stmt_list) -> sweep_stmt_list stmt_list couple
 ;;
 
+<<<<<<< HEAD
 (* Transforme une string en char list *)
 let explode s =
   let rec expl i l =
@@ -261,3 +262,6 @@ let rec print_edges edges count = match edges with
 let print_graph couple = match couple with 
 	| (nodes, edges) -> (print_nodes nodes)^(print_edges edges 0)
 ;;
+=======
+
+>>>>>>> 8fd87830ec884774171cf801c6de83efb4d661f0
