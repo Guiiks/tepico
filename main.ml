@@ -5,7 +5,7 @@ open Html
 open Filename
 
 
-(* Programme d'appel, lit le fichier .dot, le transforme en graph, l'analyse et retourne le fichier html *)
+(* Main program *)
 let _ =
 	if (Array.length Sys.argv) == 2 then begin  
 		if check_suffix (Sys.argv.(1))  ".dot" then begin
